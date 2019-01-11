@@ -1,21 +1,26 @@
 {
-  "name": "new",
-  "version": "1.0.0",
-  "description": "",
-  "keywords": [],
-  "main": "src/index.js",
-  "dependencies": {
-    "react": "16.5.2",
-    "react-dom": "16.5.2",
-    "react-scripts": "2.0.3",
-    "semantic-ui-react": "0.84.0"
-  },
-  "devDependencies": {},
+  "name": "react-dynamic-inventory",
+  "version": "0.0.0",
+  "description": "A POC for a dynamic inventory using MOBX and TYPESCRIPT",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "build": "webpack ./webpack.config.js",
+    "start": "webpack-dev-server ./webpack.config.js --content-base ./public"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "dependencies": {
+    "@types/react": "16.0.18",
+    "@types/react-dom": "16.0.2",
+    "css-loader": "^2.1.0",
+    "mobx": "3.4.1",
+    "mobx-react": "4.3.5",
+    "node-sass": "^4.11.0",
+    "react": "16.0.0",
+    "react-dom": "16.0.0",
+    "sass-loader": "^7.1.0",
+    "semantic-ui-react": "0.84.0",
+    "style-loader": "^0.23.1",
+    "ts-loader": "3.0.5",
+    "typescript": "2.5.3",
+    "webpack": "3.8.1",
+    "webpack-dev-server": "2.9.3"
+  }
 }
