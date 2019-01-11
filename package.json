@@ -2,6 +2,7 @@
   "name": "react-dynamic-inventory",
   "version": "0.0.0",
   "description": "A POC for a dynamic inventory using MOBX and TYPESCRIPT",
+  "main": "public/build/app.js",
   "scripts": {
     "build": "webpack ./webpack.config.js",
     "start": "webpack-dev-server ./webpack.config.js --content-base ./public"
