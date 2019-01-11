@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import products from './products';
 import { Card, Icon, Image } from 'semantic-ui-react';
 import { observable, action } from 'mobx';
@@ -46,8 +45,5 @@ class App extends React.Component<{}> {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+export default App;
 
