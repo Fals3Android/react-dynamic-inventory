@@ -1,44 +1,70 @@
 import * as React from 'react';
 import products from './products';
 import { Card, Icon, Image } from 'semantic-ui-react';
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
 
 class Products {
   @observable p = products;
 
+  @observable currentProduct = {
+    name: "",
+    description: "",
+    image: "",
+    price: "",
+    rating: "",
+    reviewCount: ""
+  };
+
   @action
   getProduct() {
     const keys = Object.keys(this.p);
-    return products[keys[Math.floor((Math.random() * keys.length))]];
+    return this.p[keys[Math.floor((Math.random() * keys.length))]];
+  }
+
+  @action
+  setProduct(product) {
+    this.currentProduct = product;
+  }
+
+  @computed
+  get hasFiveStarRating() {
+    return parseInt(this.currentProduct.rating) === 5;
   }
 }
 
 @observer
 class App extends React.Component<{}> {
-  data = new Products().getProduct();
+  data = new Products();
   render() {
+    const product = this.data.getProduct();
+    this.data.setProduct(product);
+
     return (
       <Card>
-        <Image src={this.data.image} />
+        <Image src={product.image} />
         <Card.Content>
-          <Card.Header>{this.data.name}</Card.Header>
+          <Card.Header>{product.name}</Card.Header>
           <Card.Meta>
             <span className='date'></span>
           </Card.Meta>
-          <Card.Description>{this.data.description}</Card.Description>
+          <Card.Description>{product.description}</Card.Description>
         </Card.Content>
         <Card.Content extra>
         <a>
             <Icon name='id badge' />
-            {this.data.reviewCount}
+            {product.reviewCount}
           </a>
         </Card.Content>
         <Card.Content extra>
           <a>
             <Icon name='star' />
-            {this.data.rating}
+            {product.rating}
           </a>
+          { 
+            this.data.hasFiveStarRating 
+            && <p>Preferred product !!!</p>
+          }
         </Card.Content>
         </Card>
     );
