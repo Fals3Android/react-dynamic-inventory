@@ -32,6 +32,18 @@ class AppState {
     setProduct(product) {
       this.currentProduct = product;
     }
+
+    @action
+    resetProduct() {
+      this.currentProduct = {
+        name: "",
+        description: "",
+        image: "",
+        price: "",
+        rating: "",
+        reviewCount: ""
+      }; 
+    }
   
     @computed
     get hasFiveStarRating() {
