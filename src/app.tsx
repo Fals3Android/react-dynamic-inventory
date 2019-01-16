@@ -3,13 +3,23 @@ import { Card, Icon, Image } from 'semantic-ui-react';
 import { appState } from './AppState';
 import { observer } from 'mobx-react';
 
+// Placeholder styles till I get sass working
+const Styles = {
+  wordWrap: 'break-word'
+}
+
 @observer
 class App extends React.Component<{}> {
-  render() {
-    const product = appState.getProduct();
-    appState.setProduct(product);
+  componentWillMount() {
+    appState.getEtsyListings(); 
+  }
 
+  render() {
+    const product = appState.p;
+    appState.setProduct(appState);
+    appState.getListingImage(appState.p.listing_id);
     return (
+      <div className="ui container centered card">
       <Card>
         <Image src={product.image} />
         <Card.Content>
@@ -17,12 +27,18 @@ class App extends React.Component<{}> {
           <Card.Meta>
             <span className='date'></span>
           </Card.Meta>
-          <Card.Description>{product.description}</Card.Description>
+          <Card.Description style={Styles}>{product.description}</Card.Description>
         </Card.Content>
         <Card.Content extra>
         <a>
             <Icon name='id badge' />
             {product.reviewCount}
+          </a>
+        </Card.Content>
+        <Card.Content extra>
+        <a>
+            <Icon name='dollar' />
+            {product.price}
           </a>
         </Card.Content>
         <Card.Content extra>
@@ -36,6 +52,7 @@ class App extends React.Component<{}> {
           }
         </Card.Content>
         </Card>
+        </div>
     );
   }
 }
