@@ -10,10 +10,13 @@ class App extends React.Component<{}> {
     appState.getEtsyListings(); 
   }
 
-  render() {
-    const product = appState.p;
+  componentDidUpdate() {
     appState.setProduct(appState);
     appState.getListingImage(appState.p.listing_id);
+  }
+
+  render() {
+    const product = appState.p;
     return (
       <div className="ui container centered card">
       <Card>

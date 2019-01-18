@@ -1,6 +1,7 @@
 import products from './products';
 import { observable, action, computed, runInAction } from 'mobx';
 import etsy from './EtsyRetailAPI';
+const Entities = require('html-entities').AllHtmlEntities;
 
 interface ProductListings {
   listing_id: number,
@@ -11,7 +12,7 @@ interface ProductListings {
   rating: string,
   reviewCount: string
 }
-
+//TODO: need to clean up this whole appstate class
 class AppState {
     @observable p = {
       listing_id: null,
@@ -36,12 +37,16 @@ class AppState {
     @action
     getEtsyListings() {
         const e = new etsy();
+        const entities = new Entities();
         e.fetchLatestInventory().promise.then(
             response => {
+              const listing_id_e = response.results[0].listing_id;
+              const title_e =  entities.decode(response.results[0].title);
+              const description_e = entities.decode(response.results[0].description);
               let filteredObj = {
-                listing_id: response.results[0].listing_id,
-                name: response.results[0].title,
-                description: response.results[0].description,
+                listing_id: listing_id_e,
+                name: title_e,
+                description: description_e,
                 image: "",
                 price: response.results[0].price,
                 rating: "",
@@ -63,6 +68,7 @@ class AppState {
 
     @action
     getListingImage(id) {
+      if(id) {
         const e = new etsy();
         e.fetchInventoryImage(id).promise.then(
             response => {
@@ -78,6 +84,7 @@ class AppState {
                 // })
             }
         )
+      }
     }
   
     @action
