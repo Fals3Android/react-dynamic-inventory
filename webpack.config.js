@@ -1,3 +1,13 @@
+const webpack = require('webpack');
+const dotenv = require('dotenv');
+const env = dotenv.config().parsed;
+  
+// reduce all env keys to an object for DefinePlugin below
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
+
 module.exports = {
   devtool: 'inline-source-map',
   entry: './src/index.tsx',
@@ -27,5 +37,8 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin(envKeys)
+  ]
 }
