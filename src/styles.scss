@@ -1,5 +1,7 @@
 #root {
   .description {
     word-wrap: break-word;
+    overflow: auto;
+    max-height: 175px;
   }
 } 

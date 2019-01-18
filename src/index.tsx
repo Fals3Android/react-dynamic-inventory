@@ -6,7 +6,6 @@ import App from './app';
 ReactDOM.render(
     <div>
     <App/>
-    <MobxReactDevtools/>
     </div>,
     document.getElementById('root')
 );
