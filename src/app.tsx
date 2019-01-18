@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react';
+import { Card, Icon, Image, Button } from 'semantic-ui-react';
 import { appState } from './AppState';
 import { observer } from 'mobx-react';
 const Styles = require('./styles.scss');
@@ -10,9 +10,19 @@ class App extends React.Component<{}> {
     appState.getEtsyListings(); 
   }
 
+  updateProductsRandomly = () => {
+    const offset = Math.floor((Math.random() * 1000));
+    appState.getEtsyListings(offset);
+  }
+
   render() {
     return (
-      <div className="ui container centered cards">
+      <div>
+      <div className="EtsyHeader ui huge header">
+        Etsy Popup Store
+        <Button primary onClick={this.updateProductsRandomly}>View More Products</Button>
+      </div>
+      <div className="EtsyCards ui container centered cards">
         {
           appState.EtsyProducts.map(product => {
             return <Card className="EtsyCard" key={product.listing_id}>
@@ -28,6 +38,7 @@ class App extends React.Component<{}> {
           </Card>
           })
         }
+      </div>
       </div>
     );
   }

@@ -19,10 +19,10 @@ class AppState {
     @observable EtsyProducts: ProductListings[] = [];
 
     @action
-    getEtsyListings() {
+    getEtsyListings(listingIndex = 0) {
         const e = new etsy();
         const entities = new Entities();
-        e.fetchLatestInventory().promise.then(
+        e.fetchLatestInventory(12, listingIndex).promise.then(
             response => {
               const filteredProducts = response.results.map(key => {
                   return {
