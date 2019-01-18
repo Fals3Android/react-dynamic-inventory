@@ -9,29 +9,19 @@ interface ProductListings {
   description: string,
   image: string,
   price: string,
-  rating: string,
-  reviewCount: string
+  num_favorers: string,
+  views: string
 }
 //TODO: need to clean up this whole appstate class
 class AppState {
-    @observable p = {
+    @observable p: ProductListings = {
       listing_id: null,
       name: "",
       description: "",
       image: "",
       price: "",
-      rating: "",
-      reviewCount: ""
-    };
-  
-    @observable currentProduct: ProductListings = {
-      listing_id: null,
-      name: "",
-      description: "",
-      image: "",
-      price: "",
-      rating: "",
-      reviewCount: ""
+      num_favorers: "",
+      views: ""
     };
 
     @action
@@ -49,8 +39,8 @@ class AppState {
                 description: description_e,
                 image: "",
                 price: response.results[0].price,
-                rating: "",
-                reviewCount: ""
+                num_favorers: response.results[0].num_favorers || 0,
+                views: response.results[0].views || 0
               }
               runInAction(() => {
                   this.p = filteredObj
@@ -87,28 +77,10 @@ class AppState {
       }
     }
   
-    @action
-    setProduct(product) {
-      this.currentProduct = product;
-    }
-
-    @action
-    resetProduct() {
-      this.currentProduct = {
-        listing_id: null,
-        name: "",
-        description: "",
-        image: "",
-        price: "",
-        rating: "",
-        reviewCount: ""
-      }; 
-    }
-  
-    @computed
-    get hasFiveStarRating() {
-      return this.currentProduct.rating === "5";
-    }
+    // @computed
+    // get hasFiveStarRating() {
+    //   return this.currentProduct.num_favorers === "5";
+    // }
   }
 
   export const appState = new AppState();

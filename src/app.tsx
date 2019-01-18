@@ -11,47 +11,25 @@ class App extends React.Component<{}> {
   }
 
   componentDidUpdate() {
-    appState.setProduct(appState);
     appState.getListingImage(appState.p.listing_id);
   }
 
   render() {
     const product = appState.p;
     return (
-      <div className="ui container centered card">
-      <Card>
-        <Image src={product.image} />
-        <Card.Content>
-          <Card.Header>{product.name}</Card.Header>
-          <Card.Meta>
-            <span className='date'></span>
-          </Card.Meta>
-          <Card.Description className="description">{product.description}</Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-        <a>
-            <Icon name='id badge' />
-            {product.reviewCount}
-          </a>
-        </Card.Content>
-        <Card.Content extra>
-        <a>
-            <Icon name='dollar' />
-            {product.price}
-          </a>
-        </Card.Content>
-        <Card.Content extra>
-          <a>
-            <Icon name='star' />
-            {product.rating}
-          </a>
-          { 
-            appState.hasFiveStarRating 
-            && <p>Preferred product !!!</p>
-          }
-        </Card.Content>
+      <div className="ui container centered cards">
+        <Card>
+          <Image src={product.image} />
+          <Card.Content>
+            <Card.Header>{product.name}</Card.Header>
+            <Card.Meta> <span className='date'></span></Card.Meta>
+            <Card.Description className="description">{product.description}</Card.Description>
+          </Card.Content>
+          <Card.Content extra><Icon name='dollar' />{product.price}</Card.Content>
+          <Card.Content extra><Icon name='id badge' />{product.views}</Card.Content>
+          <Card.Content extra><Icon name='star' />{product.num_favorers}</Card.Content>
         </Card>
-        </div>
+      </div>
     );
   }
 }
