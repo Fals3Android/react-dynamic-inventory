@@ -1,5 +1,5 @@
 const jsonp = require('jsonp-promise');
-const placeHolderAPIKEY = 'xo9307xufnh606o17pyj4c1u';
+const placeHolderAPIKEY = '';
 
 class EtsyRetailAPI {
     fetchLatestInventory() {
