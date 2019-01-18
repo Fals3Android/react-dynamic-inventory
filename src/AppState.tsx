@@ -9,7 +9,8 @@ interface ProductListings {
   image: string,
   price: string,
   num_favorers: string,
-  views: string
+  views: string,
+  url: string
 }
 
 // Extend the array class to describe an array of objects
@@ -32,7 +33,8 @@ class AppState {
                     image: key.MainImage.url_fullxfull,
                     price: key.price,
                     num_favorers: key.num_favorers || 0,
-                    views: key.views || 0
+                    views: key.views || 0,
+                    url: key.url
                   }
                 });
               runInAction(() => {

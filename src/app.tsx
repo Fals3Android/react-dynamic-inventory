@@ -35,6 +35,7 @@ class App extends React.Component<{}> {
             <Card.Content extra><Icon name='dollar' />{product.price}</Card.Content>
             <Card.Content extra><Icon name='id badge' />{product.views}</Card.Content>
             <Card.Content extra><Icon name='star' />{product.num_favorers}</Card.Content>
+            <Card.Content extra><a href={product.url} target="_blank"><Icon name='eye' />View On Etsy</a></Card.Content>
           </Card>
           })
         }
