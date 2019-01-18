@@ -2,11 +2,7 @@ import * as React from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react';
 import { appState } from './AppState';
 import { observer } from 'mobx-react';
-
-// Placeholder styles till I get sass working
-const Styles = {
-  wordWrap: 'break-word'
-}
+const Styles = require('./styles.scss');
 
 @observer
 class App extends React.Component<{}> {
@@ -27,7 +23,7 @@ class App extends React.Component<{}> {
           <Card.Meta>
             <span className='date'></span>
           </Card.Meta>
-          <Card.Description style={Styles}>{product.description}</Card.Description>
+          <Card.Description className="description">{product.description}</Card.Description>
         </Card.Content>
         <Card.Content extra>
         <a>

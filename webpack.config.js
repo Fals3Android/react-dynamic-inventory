@@ -15,17 +15,17 @@ module.exports = {
     }
   },
   module: {
-    rules: [
+    loaders: [
       { test: /\.tsx?$/, loader: 'ts-loader' },
       {
         test: /\.scss$/,
         exclude: /node_modules/,
         loader: [
-            "style-loader", // creates style nodes from JS strings
-            "css-loader", // translates CSS into CommonJS
-            "sass-loader" // compiles Sass to CSS, using Node Sass by default
+            "style-loader",
+            "css-loader",
+            "sass-loader"
         ]
-    }
+      }
     ]
   }
 }
