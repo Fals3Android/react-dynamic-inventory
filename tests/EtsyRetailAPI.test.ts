@@ -1,23 +1,15 @@
-import * as nock from 'nock';
 import EtsyRetailAPI from '../src/EtsyRetailAPI';
+const jsonp = require('jsonp-promise');
+const RetailFixture = require('./fixtures/EtsyResponse.fixture.json');
 
-beforeEach(() => {
-    // nock('https://openapi.etsy.com')
-    //   .get('/v2/listings/active.js')
-    //   .query({params: {
-    //         api_key: placeHolderAPIKEY,
-    //         limit: "1",
-    //         offset: "0",
-    //         includes: "MainImage"
-    //     }
-    //   })
-    //   .reply(200, {
-    //     results: [{name: 'test'}],
-    //   });    
-})
+jest.mock('jsonp-promise');
 
 it('should return some inventory', () => {
+    const resp = RetailFixture;
+    jsonp.mockResolvedValue(resp);
     const etsy = new EtsyRetailAPI();
-    let results = etsy.fetchLatestInventory(1,0);
-    expect(typeof results.promise).toEqual('object');
+    return etsy.fetchLatestInventory(1,0).then(
+        response => {
+            expect(response.results.length).toEqual(2);
+    });
   });

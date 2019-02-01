@@ -46,6 +46,10 @@ class AppState {
             }
         )
     }
+
+    getCurrentProducts() {
+        return this.EtsyProducts;
+    }
   }
 
   export const appState = new AppState();
